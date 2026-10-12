@@ -1,6 +1,6 @@
 # REPORT — Lab Day 9
 
-> Số liệu từ pipeline chạy với MSSV `2A202602395`. Bằng chứng và ảnh chụp được lưu trong `report/`. Các phần chưa chạy đúng toàn bộ GUIDE được ghi rõ ở Câu 4 và Câu 9.
+> Số liệu từ pipeline chạy với MSSV `2A202602395`. Bằng chứng và ảnh chụp được lưu trong `report/`. Các kết quả đều đối chiếu với file bằng chứng; kiểm tra bài nộp và Git được thực hiện sau lần chạy cuối.
 
 | | |
 |---|---|
@@ -57,7 +57,7 @@ Khung hình **đen** và khung hình **tối** khác nhau thế nào, pipeline x
 | 2 | 149 | 53 |
 | 6 | 363 | 244 |
 
-A có 6 khung đen, B có 4; A có 4 khung tối được gắn cờ, B có 61. Pipeline loại khung đen nhưng không loại chỉ vì tối, phù hợp để giữ cảnh đường hầm/bóng râm có nội dung. Ngưỡng dHash 0/2/6 cho A lần lượt 61/149/363 khung trùng và B 8/53/244. Chọn 2 như pipeline để cân bằng giảm dư thừa và giữ thay đổi nhỏ. Xe chậm hoặc camera đứng hình tạo nhiều khung gần nhau; xe nhanh có thay đổi lớn, nên ngưỡng cần đánh giá theo chuyển động và cảnh.
+A có 6 khung đen, B có 4; A có 4 khung tối được gắn cờ, B có 61. Đen là độ sáng trung bình <12; tối là từ 12 đến <40. Pipeline loại khung đen nhưng không loại chỉ vì tối; khung tối vẫn có thể bị loại vì mờ, trùng hoặc mất đồng bộ. Cách này phù hợp để giữ cảnh đường hầm/bóng râm có nội dung. Ngưỡng dHash 0/2/6 cho A lần lượt 61/149/363 khung trùng và B 8/53/244. Chọn 2 như pipeline để cân bằng giảm dư thừa và giữ thay đổi nhỏ. Xe chậm hoặc camera đứng hình tạo nhiều khung gần nhau; xe nhanh có thay đổi lớn, nên ngưỡng cần đánh giá theo chuyển động và cảnh.
 
 ## Bước 4 · Gold
 
@@ -69,7 +69,7 @@ Trong 1.019 khung được giữ thuộc 26 trip, chia theo khung làm cả 26 t
 ### Câu 7
 Vì sao `dataset_version` là **băm nội dung** chứ không phải ngày giờ hay số đếm? Hai lần chạy liên tiếp cho kết quả gì? Vì sao `dataset_version` của bạn **khác** bạn bè dù cùng dữ liệu (liên hệ MSSV)?
 
-Phiên bản băm nội dung nhận diện cùng tập mẫu/split bất kể giờ chạy; băm không phải lịch sử commit của từng bảng. Hai lần export đều ra `3a7c6d3ebd18`, với 676 train, 169 val, 174 test (18/4/4 trip). MSSV `2A202602395` tham gia thứ tự chia trip theo drive nên MSSV khác có thể tạo phân bố và version khác. Thử MSSV `2A202602396` thực tế tạo version `77e2743d15f7` và split {'train': 708, 'test': 165, 'val': 146}; khôi phục `2A202602395` trả về version gốc. Đã dùng biến môi trường riêng cho lệnh thử, không thay MSSV lưu trong .env; bằng chứng: student_id_version.json.
+Phiên bản là 12 ký tự đầu SHA-256 của danh sách frame_id|split đã sắp xếp, nhận diện cùng tập mẫu/split bất kể giờ chạy. Nó không băm byte ảnh hay mọi cột telemetry; cần lineage và SHA-256 video để kiểm tra nguồn gốc đầy đủ. Hai lần export đều ra `3a7c6d3ebd18`, với 676 train, 169 val, 174 test (18/4/4 trip). MSSV `2A202602395` tham gia thứ tự chia trip theo drive nên MSSV khác có thể tạo phân bố và version khác. Thử MSSV `2A202602396` thực tế tạo version `77e2743d15f7` và split {'train': 708, 'test': 165, 'val': 146}; khôi phục `2A202602395` trả về version gốc. Đã dùng biến môi trường riêng cho lệnh thử, không thay MSSV lưu trong .env; bằng chứng: student_id_version.json.
 
 ### Câu 8
 Đọc phần `lineage` trong `manifest.json` của dataset bạn. Trả lời "dataset này được tạo từ dữ liệu nào?" bằng chính nội dung đó. Nếu một người hỏi 3 tháng sau, thông tin nào giúp tái tạo lại đúng dataset này?
