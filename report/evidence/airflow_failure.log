@@ -1,33 +1,33 @@
-[2026-10-12T16:40:15.709+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
-[2026-10-12T16:40:15.730+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: day09_video_pipeline.silver_frames guide_failure_thang_20261012 map_index=21 [queued]>
-[2026-10-12T16:40:15.738+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: day09_video_pipeline.silver_frames guide_failure_thang_20261012 map_index=21 [queued]>
-[2026-10-12T16:40:15.738+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
-[2026-10-12T16:40:15.746+0000] {taskinstance.py:2890} INFO - Executing <Mapped(BashOperator): silver_frames> on 2026-10-12 16:39:15+00:00
-[2026-10-12T16:40:15.749+0000] {standard_task_runner.py:72} INFO - Started process 4331 to run task
-[2026-10-12T16:40:15.751+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'day09_video_pipeline', 'silver_frames', 'guide_failure_thang_20261012', '--job-id', '90', '--raw', '--subdir', 'DAGS_FOLDER/day09_video_pipeline.py', '--cfg-path', '/tmp/tmp06bgltlw', '--map-index', '21']
-[2026-10-12T16:40:15.752+0000] {standard_task_runner.py:105} INFO - Job 90: Subtask silver_frames
-[2026-10-12T16:40:15.789+0000] {task_command.py:467} INFO - Running <TaskInstance: day09_video_pipeline.silver_frames guide_failure_thang_20261012 map_index=21 [running]> on host ea65c01c72d2
-[2026-10-12T16:40:15.857+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='day09_video_pipeline' AIRFLOW_CTX_TASK_ID='silver_frames' AIRFLOW_CTX_EXECUTION_DATE='2026-10-12T16:39:15+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='guide_failure_thang_20261012'
-[2026-10-12T16:40:15.858+0000] {taskinstance.py:732} INFO - ::endgroup::
-[2026-10-12T16:40:15.859+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
-[2026-10-12T16:40:15.859+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/*** && /home/airflow/***-venv/bin/python -m pipeline.cli extract --trip trip-07900']
-[2026-10-12T16:40:15.866+0000] {subprocess.py:99} INFO - Output:
-[2026-10-12T16:40:16.537+0000] {subprocess.py:106} INFO - Traceback (most recent call last):
-[2026-10-12T16:40:16.538+0000] {subprocess.py:106} INFO -   File "<frozen runpy>", line 198, in _run_module_as_main
-[2026-10-12T16:40:16.538+0000] {subprocess.py:106} INFO -   File "<frozen runpy>", line 88, in _run_code
-[2026-10-12T16:40:16.538+0000] {subprocess.py:106} INFO -   File "/opt/***/pipeline/cli.py", line 65, in <module>
-[2026-10-12T16:40:16.538+0000] {subprocess.py:106} INFO -     rc = main()
-[2026-10-12T16:40:16.538+0000] {subprocess.py:106} INFO -          ^^^^^^
-[2026-10-12T16:40:16.539+0000] {subprocess.py:106} INFO -   File "/opt/***/pipeline/cli.py", line 59, in main
-[2026-10-12T16:40:16.539+0000] {subprocess.py:106} INFO -     out = frames.extract_trip(a.trip)
-[2026-10-12T16:40:16.539+0000] {subprocess.py:106} INFO -           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[2026-10-12T16:40:16.539+0000] {subprocess.py:106} INFO -   File "/opt/***/pipeline/frames.py", line 66, in extract_trip
-[2026-10-12T16:40:16.539+0000] {subprocess.py:106} INFO -     _fail_once(trip_id)
-[2026-10-12T16:40:16.539+0000] {subprocess.py:106} INFO -   File "/opt/***/pipeline/frames.py", line 61, in _fail_once
-[2026-10-12T16:40:16.539+0000] {subprocess.py:106} INFO -     raise RuntimeError(f"simulated crash while extracting {trip_id}; run it again")
-[2026-10-12T16:40:16.539+0000] {subprocess.py:106} INFO - RuntimeError: simulated crash while extracting trip-07900; run it again
-[2026-10-12T16:40:16.593+0000] {subprocess.py:110} INFO - Command exited with return code 1
-[2026-10-12T16:40:16.603+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+[2026-10-12T16:54:52.211+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-10-12T16:54:52.232+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: day09_video_pipeline.silver_frames guide_fail_clean_pipeline_20261012 map_index=21 [queued]>
+[2026-10-12T16:54:52.243+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: day09_video_pipeline.silver_frames guide_fail_clean_pipeline_20261012 map_index=21 [queued]>
+[2026-10-12T16:54:52.243+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2026-10-12T16:54:52.251+0000] {taskinstance.py:2890} INFO - Executing <Mapped(BashOperator): silver_frames> on 2026-10-12 16:54:00+00:00
+[2026-10-12T16:54:52.257+0000] {standard_task_runner.py:72} INFO - Started process 3337 to run task
+[2026-10-12T16:54:52.259+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'day09_video_pipeline', 'silver_frames', 'guide_fail_clean_pipeline_20261012', '--job-id', '169', '--raw', '--subdir', 'DAGS_FOLDER/day09_video_pipeline.py', '--cfg-path', '/tmp/tmp7uir8cnu', '--map-index', '21']
+[2026-10-12T16:54:52.260+0000] {standard_task_runner.py:105} INFO - Job 169: Subtask silver_frames
+[2026-10-12T16:54:52.305+0000] {task_command.py:467} INFO - Running <TaskInstance: day09_video_pipeline.silver_frames guide_fail_clean_pipeline_20261012 map_index=21 [running]> on host ccac51fca203
+[2026-10-12T16:54:52.374+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='day09_video_pipeline' AIRFLOW_CTX_TASK_ID='silver_frames' AIRFLOW_CTX_EXECUTION_DATE='2026-10-12T16:54:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='guide_fail_clean_pipeline_20261012'
+[2026-10-12T16:54:52.375+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2026-10-12T16:54:52.376+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2026-10-12T16:54:52.376+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/*** && /home/airflow/***-venv/bin/python -m pipeline.cli extract --trip trip-07900']
+[2026-10-12T16:54:52.385+0000] {subprocess.py:99} INFO - Output:
+[2026-10-12T16:54:53.036+0000] {subprocess.py:106} INFO - Traceback (most recent call last):
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -   File "<frozen runpy>", line 198, in _run_module_as_main
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -   File "<frozen runpy>", line 88, in _run_code
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -   File "/opt/***/pipeline/cli.py", line 65, in <module>
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -     rc = main()
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -          ^^^^^^
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -   File "/opt/***/pipeline/cli.py", line 59, in main
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -     out = frames.extract_trip(a.trip)
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -   File "/opt/***/pipeline/frames.py", line 66, in extract_trip
+[2026-10-12T16:54:53.037+0000] {subprocess.py:106} INFO -     _fail_once(trip_id)
+[2026-10-12T16:54:53.038+0000] {subprocess.py:106} INFO -   File "/opt/***/pipeline/frames.py", line 61, in _fail_once
+[2026-10-12T16:54:53.038+0000] {subprocess.py:106} INFO -     raise RuntimeError(f"simulated crash while extracting {trip_id}; run it again")
+[2026-10-12T16:54:53.038+0000] {subprocess.py:106} INFO - RuntimeError: simulated crash while extracting trip-07900; run it again
+[2026-10-12T16:54:53.105+0000] {subprocess.py:110} INFO - Command exited with return code 1
+[2026-10-12T16:54:53.116+0000] {taskinstance.py:3313} ERROR - Task failed with exception
 Traceback (most recent call last):
   File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
     result = _execute_callable(context=context, **execute_callable_kwargs)
@@ -44,9 +44,9 @@ Traceback (most recent call last):
   File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 276, in execute
     raise AirflowException(
 airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
-[2026-10-12T16:40:16.609+0000] {taskinstance.py:1226} INFO - Marking task as FAILED. dag_id=day09_video_pipeline, task_id=silver_frames, run_id=guide_failure_thang_20261012, map_index=21, execution_date=20261012T163915, start_date=20261012T164015, end_date=20261012T164016
-[2026-10-12T16:40:16.633+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
-[2026-10-12T16:40:16.633+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 90 for task silver_frames (Bash command failed. The command returned a non-zero exit code 1.; 4331)
+[2026-10-12T16:54:53.123+0000] {taskinstance.py:1226} INFO - Marking task as FAILED. dag_id=day09_video_pipeline, task_id=silver_frames, run_id=guide_fail_clean_pipeline_20261012, map_index=21, execution_date=20261012T165400, start_date=20261012T165452, end_date=20261012T165453
+[2026-10-12T16:54:53.147+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2026-10-12T16:54:53.148+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 169 for task silver_frames (Bash command failed. The command returned a non-zero exit code 1.; 3337)
 Traceback (most recent call last):
   File "/home/airflow/.local/lib/python3.11/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
     ret = args.func(args, dag=self.dag)
@@ -95,6 +95,6 @@ Traceback (most recent call last):
   File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 276, in execute
     raise AirflowException(
 airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
-[2026-10-12T16:40:16.646+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
-[2026-10-12T16:40:16.670+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
-[2026-10-12T16:40:16.672+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2026-10-12T16:54:53.195+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2026-10-12T16:54:53.218+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-10-12T16:54:53.220+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
