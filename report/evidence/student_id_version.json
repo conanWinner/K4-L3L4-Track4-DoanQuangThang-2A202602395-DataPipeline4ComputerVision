@@ -1,0 +1,32 @@
+{
+  "student_id": "2A202602395",
+  "alternate_student_id": "2A202602396",
+  "alternate": {
+    "dataset_version": "77e2743d15f7",
+    "frames": 1019,
+    "by_split": {
+      "train": 708,
+      "test": 165,
+      "val": 146
+    },
+    "trips_by_split": {
+      "val": 4,
+      "train": 18,
+      "test": 4
+    }
+  },
+  "restored": {
+    "dataset_version": "3a7c6d3ebd18",
+    "frames": 1019,
+    "by_split": {
+      "train": 676,
+      "test": 174,
+      "val": 169
+    },
+    "trips_by_split": {
+      "test": 4,
+      "val": 4,
+      "train": 18
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # REPORT — Lab Day 9
 
-> Điền **bằng lời và số liệu của chính bạn** (lấy từ đầu ra của `scripts/lab.sh step ...` và từ `report/evidence/*.json`). Bài làm công khai trên GitHub; giảng viên đối chiếu với lịch sử commit và với bài của các bạn khác. Mỗi câu 3 đến 8 dòng là đủ.
+> Số liệu từ pipeline chạy với MSSV `2A202602395`. Bằng chứng và ảnh chụp được lưu trong `report/`. Các phần chưa chạy đúng toàn bộ GUIDE được ghi rõ ở Câu 4 và Câu 9.
 
 | | |
 |---|---|
@@ -14,14 +14,14 @@
 - `dataset_version` của bạn: `3a7c6d3ebd18`  (phải khớp `report/evidence/run_summary.json`)
 - Số khung hình train / val / test của bạn: 676 / 169 / 174
 - `report/verify.txt`: tạo bằng `python3 scripts/check_submission.py --save-verify` (phải có `27/27 checks passed`).
-- Ảnh chụp trong `report/screenshots/`: `airflow_graph.png`, `minio_lake.png`, `metabase_dashboard.png`, và ảnh bài tập sập/chạy lại (log task đỏ thấy trip của bạn).
+- Ảnh chụp trong `report/screenshots/`: `airflow_graph.png`, `minio_lake.png`, `metabase_dashboard.png`, `airflow_failure.png`, `airflow_recovered.png` và `metabase_question.png`.
 
 ## Bước 1 · Bronze
 
 ### Câu 1
 Liệt kê **ít nhất 4 khác biệt** giữa telemetry nguồn A và nguồn B mà bạn thấy ở bronze. Vì sao pipeline giữ **mỗi nguồn một bảng bronze** và để mọi cột ở dạng chữ, thay vì gộp và ép kiểu ngay?
 
-Nguồn A dùng `ts_utc` ISO UTC, B dùng `timestamp_ms` epoch mili giây; A dùng `speed_mps`, B dùng `spd_kmh`; A có `heading_deg/lat/lon/alt_m`, B có `hdg/latitude/longitude/altitude`; A dùng `acc_x/acc_y`, B dùng `ax/ay`; A dùng gas/brake trong thang 0–1, B dùng throttle_pct/brake_pct trong thang 0–100. B còn lệch đồng hồ +1.500 ms. Giữ riêng bảng và dữ liệu dạng chữ giúp bảo toàn bản gốc, kể cả ô trống/lỗi, để kiểm tra và áp dụng lại luật chuẩn hoá. A có 3.021 dòng, B 3.234; nạp lại báo already present, lịch sử bảng A vẫn chỉ có commit phiên bản 0.
+Nguồn A dùng `ts_utc` ISO UTC, B dùng `timestamp_ms` epoch mili giây; A dùng `speed_mps`, B dùng `spd_kmh`; A có `heading_deg/lat/lon/alt_m`, B có `hdg/latitude/longitude/altitude`; A dùng `acc_x/acc_y`, B dùng `ax/ay`; A dùng gas/brake trong thang 0–1, B dùng throttle_pct/brake_pct trong thang 0–100. B còn lệch đồng hồ +1.500 ms. Các cột nguồn CSV giữ dạng chữ; cột kỹ thuật `_row_no` là số nguyên và `_ingested_at` là timestamp. Giữ riêng bảng và dữ liệu nguồn dạng chữ giúp bảo toàn bản gốc, kể cả ô trống/lỗi, để kiểm tra và áp dụng lại luật chuẩn hoá. A có 3.021 dòng, B 3.234; nạp lại báo already present, lịch sử bảng A vẫn chỉ có commit phiên bản 0.
 
 ## Bước 2 · Silver telemetry
 
@@ -29,6 +29,12 @@ Nguồn A dùng `ts_utc` ISO UTC, B dùng `timestamp_ms` epoch mili giây; A dù
 Pipeline đưa hai nguồn về một schema như thế nào (đơn vị, kiểu thời gian, **độ lệch đồng hồ**)? Bằng chứng nào trong kết quả bước 2 cho thấy đã đúng? Dán bảng quarantine của bạn (số dòng theo từng lý do, từng drive) và giải thích vì sao dòng lỗi vào `rejects` thay vì bị xoá.
 
 Staging đổi tên cột B, chia tốc độ cho 3,6 và bàn đạp cho 100; timestamp epoch được trừ offset 1.500 ms rồi chuyển UTC. Telemetry B bắt đầu `2025-10-08 14:30:00.009+00:00`, lệch video chỉ 9 ms. A còn 2.968 dòng sạch, B 3.181; mỗi drive cách ly 20 duplicate, 30 speed_missing, 3 speed_out_of_range (53 dòng). Tổng sạch 6.149 + rejects 106 = 6.255 nhận vào. Rejects giữ dòng lỗi và lý do để điều tra hoặc xử lý lại, tránh mất dấu dữ liệu.
+
+| Drive | duplicate | speed_missing | speed_out_of_range | Tổng rejects | Dòng sạch |
+|---|---:|---:|---:|---:|---:|
+| drive_a | 20 | 30 | 3 | 53 | 2968 |
+| drive_b | 20 | 30 | 3 | 53 | 3181 |
+
 
 ### Câu 3
 Vì sao test `max_gap_ms` là `warn` còn `in_range` là `error`? Kết quả thí nghiệm `break-gate` của bạn (`break_gate.json`): test nào bắt được, bao nhiêu dòng, và điều đó cho biết gì về vai trò của "cổng chất lượng"?
@@ -63,7 +69,7 @@ Trong 1.019 khung được giữ thuộc 26 trip, chia theo khung làm cả 26 t
 ### Câu 7
 Vì sao `dataset_version` là **băm nội dung** chứ không phải ngày giờ hay số đếm? Hai lần chạy liên tiếp cho kết quả gì? Vì sao `dataset_version` của bạn **khác** bạn bè dù cùng dữ liệu (liên hệ MSSV)?
 
-Phiên bản băm nội dung nhận diện cùng tập mẫu/split bất kể giờ chạy; băm không phải lịch sử commit của từng bảng. Hai lần export đều ra `3a7c6d3ebd18`, với 676 train, 169 val, 174 test (18/4/4 trip). MSSV `2A202602395` tham gia thứ tự chia trip theo drive nên MSSV khác có thể tạo phân bố và version khác. Chưa thực hiện thử đổi MSSV; không coi kết luận từ mã là bằng chứng thực nghiệm cho bước này.
+Phiên bản băm nội dung nhận diện cùng tập mẫu/split bất kể giờ chạy; băm không phải lịch sử commit của từng bảng. Hai lần export đều ra `3a7c6d3ebd18`, với 676 train, 169 val, 174 test (18/4/4 trip). MSSV `2A202602395` tham gia thứ tự chia trip theo drive nên MSSV khác có thể tạo phân bố và version khác. Thử MSSV `2A202602396` thực tế tạo version `77e2743d15f7` và split {'train': 708, 'test': 165, 'val': 146}; khôi phục `2A202602395` trả về version gốc. Đã dùng biến môi trường riêng cho lệnh thử, không thay MSSV lưu trong .env; bằng chứng: student_id_version.json.
 
 ### Câu 8
 Đọc phần `lineage` trong `manifest.json` của dataset bạn. Trả lời "dataset này được tạo từ dữ liệu nào?" bằng chính nội dung đó. Nếu một người hỏi 3 tháng sau, thông tin nào giúp tái tạo lại đúng dataset này?
