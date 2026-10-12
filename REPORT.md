@@ -46,7 +46,7 @@ Vì sao test `max_gap_ms` là `warn` còn `in_range` là `error`? Kết quả th
 ### Câu 4
 Dựa vào `idempotency.json`: số dòng trước và sau hai lần chạy lại, và khi ghi kiểu `append`. Vì sao Delta `overwrite` theo partition (một trip) an toàn hơn xoá rồi ghi lại, nhất là khi giữa chừng có lỗi?
 
-Bảng silver.frames có 1.246 dòng trước và sau hai lần chạy lại trip-00003; dấu vân tay đều `6c7480dfde7e`. Trip này có 60 khung. Ghép hai bản trong bộ nhớ cho 120 dòng; đây là minh hoạ append, chưa chạy bảng Delta scratch của script chính vì chưa có xác nhận xoá bảng thử. Delta overwrite theo predicate trip_id tạo commit giao dịch thay thế đúng partition; nếu ghi lỗi trước commit thì snapshot cũ vẫn đọc được, tránh khoảng trống của cách xoá rồi ghi lại.
+Bảng silver.frames có 1.246 dòng trước và sau hai lần chạy lại trip-07900; dấu vân tay đều `6c7480dfde7e`. Trip này có 30 khung. Thí nghiệm chính thức ghi append hai lần vào bảng Delta thử cho 60 dòng (2×), rồi dọn đúng bảng thử. Delta overwrite theo predicate trip_id tạo commit giao dịch thay thế đúng trip; nếu ghi lỗi trước commit thì snapshot cũ vẫn đọc được, tránh khoảng trống của cách xoá rồi ghi lại. Lưu ý thư mục partition vật lý là drive_id; predicate thay thế dữ liệu của một trip.
 
 ### Câu 5
 Khung hình **đen** và khung hình **tối** khác nhau thế nào, pipeline xử lý khác nhau ra sao, bạn có đồng ý không? Dựa vào `threshold.json`: nếu chọn ngưỡng 0, 2, 6 thì bao nhiêu khung bị coi là trùng ở mỗi drive? Bạn chọn ngưỡng nào, vì sao, và ngưỡng đó phụ thuộc vào tốc độ xe thế nào?
