@@ -11,9 +11,9 @@
     "drive_b": 583
   },
   "trips_by_split": {
-    "test": 4,
+    "train": 18,
     "val": 4,
-    "train": 18
+    "test": 4
   },
   "manifest_sha256": "7bd438b492101c0120520bee7d2b1b0b38eda38705544262e9c4c0ad6af23b1a",
   "rules": {
@@ -30,14 +30,14 @@
     "bronze.raw_telemetry_b": 0,
     "bronze.trips_raw": 0,
     "bronze.video_files": 1,
-    "silver.frames": 131,
-    "silver.telemetry": 5,
-    "silver.frames_flagged": 4,
-    "silver.frame_telemetry": 4,
+    "silver.frames": 25,
+    "silver.telemetry": 0,
+    "silver.frames_flagged": 0,
+    "silver.frame_telemetry": 0,
     "input_video_sha256": {
       "drive_b": "bfa62703f645ff77a8578ae3fc74a00881140d38a404d43c8e2af265bbee9fdc",
       "drive_a": "636ba1a98dfc5ba665d1c935e1d2064e69f4df360ff9ffbd15795957d5e7e9aa"
     }
   },
-  "created_at": "2026-10-12T16:47:14.935387+00:00"
+  "created_at": "2026-10-12T16:57:34.884999+00:00"
 }

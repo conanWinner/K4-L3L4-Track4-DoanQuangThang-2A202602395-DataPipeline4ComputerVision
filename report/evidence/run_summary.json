@@ -1,6 +1,6 @@
 {
   "student_id": "2A202602395",
-  "finished_at": "2026-10-12T16:44:15.057524+00:00",
+  "finished_at": "2026-10-12T16:57:39.425293+00:00",
   "verify_all_passed": true,
   "dataset_version": "3a7c6d3ebd18",
   "frames": 1019,
@@ -11,8 +11,8 @@
   },
   "trips_by_split": {
     "train": 18,
-    "test": 4,
-    "val": 4
+    "val": 4,
+    "test": 4
   },
   "quarantine": {
     "drive_a:duplicate": 20,

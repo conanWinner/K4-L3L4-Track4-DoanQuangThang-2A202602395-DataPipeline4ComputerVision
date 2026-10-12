@@ -74,7 +74,7 @@ Phiên bản là 12 ký tự đầu SHA-256 của danh sách frame_id|split đã
 ### Câu 8
 Đọc phần `lineage` trong `manifest.json` của dataset bạn. Trả lời "dataset này được tạo từ dữ liệu nào?" bằng chính nội dung đó. Nếu một người hỏi 3 tháng sau, thông tin nào giúp tái tạo lại đúng dataset này?
 
-Manifest dataset 3a7c6d3ebd18 ghi bronze.raw_telemetry_a=0, bronze.raw_telemetry_b=0, bronze.trips_raw=0, bronze.video_files=1; silver.frames=131, silver.telemetry=5, silver.frames_flagged=4, silver.frame_telemetry=4 tại thời điểm lưu manifest. Video A có SHA-256 `636ba1a98dfc5ba665d1c935e1d2064e69f4df360ff9ffbd15795957d5e7e9aa`, B `bfa62703f645ff77a8578ae3fc74a00881140d38a404d43c8e2af265bbee9fdc`. Cần giữ snapshot Delta tương ứng, video gốc, MSSV, mã/luật và phiên bản môi trường để tái tạo đúng sau 3 tháng. Xem report/evidence/manifest.json.
+Manifest dataset 3a7c6d3ebd18 ghi bronze.raw_telemetry_a=0; bronze.raw_telemetry_b=0; bronze.trips_raw=0; bronze.video_files=1; silver.frames=25, silver.telemetry=0, silver.frames_flagged=0, silver.frame_telemetry=0 tại thời điểm lưu manifest. Video A có SHA-256 `636ba1a98dfc5ba665d1c935e1d2064e69f4df360ff9ffbd15795957d5e7e9aa`, B `bfa62703f645ff77a8578ae3fc74a00881140d38a404d43c8e2af265bbee9fdc`. Cần giữ snapshot Delta tương ứng, video gốc, MSSV, mã/luật và phiên bản môi trường để tái tạo đúng sau 3 tháng. Xem report/evidence/manifest.json.
 
 ## Bước 5 · Điều phối và phục vụ
 
